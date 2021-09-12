@@ -1,41 +1,15 @@
-function flipCoins(): "heads" | "tails" {
-    if(Math.random() > 0.5){
-        return "heads";
+type NestedType = number | NestedType[]
+
+function fn(arg: NestedType){
+    if(typeof arg != "number"){
+        arg.push(10)
+        console.log(...arg);
     } else {
-        return "tails";
-    }
-}
-
-interface UserInfo {
-    name: string;
-    email: string;
-}
-
-type UserInfoResponse  = [
- string,
- UserInfo | Error
-]
-
-
-function mayGetInfo(): UserInfoResponse {
-    if(flipCoins() === "heads"){
-        return [
-            "success",
-            {
-                name: "Amaan Ahmad",
-                email: "hello@amaan.codes"
-            },
-        ]
-    }
-    else {
-        return [
-            "error",
-            new Error("Could not fetch user info.")
-        ]
+        console.log(arg + 1, " just incremented the argument by 1");
     }
 }
 
 (async function(){
-    console.log(mayGetInfo());
-    
+    fn(1);
+    fn([1, 3, 4, [2], 1])
 })();
