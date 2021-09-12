@@ -1,40 +1,41 @@
-interface vehicle {
-    make: string,
-    model: string,
-    year: number, 
-    isElectron: boolean,
-};
-
-
-class Car {
-    make: string;
-    model: string;
-    year: number;
-    isElectron: boolean;
-
-    constructor(car: vehicle){
-        this.make = car.make;
-        this.model = car.model;
-        this.year = car.year;
-        this.isElectron = car.isElectron;
+function flipCoins(): "heads" | "tails" {
+    if(Math.random() > 0.5){
+        return "heads";
+    } else {
+        return "tails";
     }
 }
 
-
-function printCar(car: vehicle){
-    console.log(car.make);
-    console.log(car.model);
-    console.log(car.year);
-    console.log(car.isElectron);
+interface UserInfo {
+    name: string;
+    email: string;
 }
 
-const bmw: vehicle = {
-    make: "BMW", 
-    model: "A3", 
-    year:  2005,
-    isElectron: true
-};
+type UserInfoResponse  = [
+ string,
+ UserInfo | Error
+]
+
+
+function mayGetInfo(): UserInfoResponse {
+    if(flipCoins() === "heads"){
+        return [
+            "success",
+            {
+                name: "Amaan Ahmad",
+                email: "hello@amaan.codes"
+            },
+        ]
+    }
+    else {
+        return [
+            "error",
+            new Error("Could not fetch user info.")
+        ]
+    }
+}
 
 (async function(){
-    printCar(new Car(bmw));
+    console.log(mayGetInfo());
+    
 })();
