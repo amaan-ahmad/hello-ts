@@ -1,15 +1,32 @@
-type NestedType = number | NestedType[]
+import {UserInfoResponse} from "./user"
+interface LoginFormInput { 
+    name: string;
+    email: string;
+};
 
-function fn(arg: NestedType){
-    if(typeof arg != "number"){
-        arg.push(10)
-        console.log(...arg);
-    } else {
-        console.log(arg + 1, " just incremented the argument by 1");
-    }
+interface JobFormInput { 
+    role: string;
+    pay: number;
+};
+
+function doSomething(a: LoginFormInput, b: number): UserInfoResponse
+function doSomething(a: JobFormInput, b: string): UserInfoResponse
+
+function doSomething(a: LoginFormInput | JobFormInput, b: number | string): UserInfoResponse {
+    // do something with forms
+    return ["logged in", {
+        name: "amaan",
+        email: "hello@amaan.codes"
+    }]
 }
 
-(async function(){
-    fn(1);
-    fn([1, 3, 4, [2], 1])
-})();
+
+doSomething({
+    name :"example",
+    email: "example@abc.com"
+}, 1)
+
+doSomething({
+    role :"superman",
+    pay: 100
+}, "get me job")

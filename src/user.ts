@@ -11,7 +11,7 @@ interface UserInfo {
     email: string;
 }
 
-type UserInfoResponse  = [
+export type UserInfoResponse  = [
  string,
  UserInfo | Error
 ]
